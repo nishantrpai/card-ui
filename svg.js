@@ -1,5 +1,5 @@
-const LETTERS = {};
-const LETTER_WIDTHS = {};
+let LETTERS = {};
+let LETTER_WIDTHS = {};
 
 LETTERS["0"] = "<path d='M1 1H2L2 4H1L1 1ZM1 1H0V4H1L1 5H2L2 4H3L3 1H2L2 0H1L1 1Z'/>";
 LETTERS["1"] = "<path d='M0 0V1H1V5H2V1V0H1H0Z'/>";
@@ -103,10 +103,11 @@ export function write(text, color, scale, spacing, y) {
   for (let i = 0; i < text.length; i++) {
     let normalized = text[i].toUpperCase();
     let path = LETTERS[normalized];
-    let width = LETTER_WIDTHS[normalized] !== 0
+    let width = LETTER_WIDTHS[normalized]
       ? LETTER_WIDTHS[normalized]
       : LETTER_WIDTHS["DEFAULT"];
 
+    console.log(normalized, path, width);
     if (!path) continue;
 
     letters += `<g transform='translate(${letterPos})'>${path}</g>`;

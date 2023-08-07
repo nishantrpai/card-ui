@@ -96,7 +96,16 @@ LETTER_WIDTHS["m"] = 5;
 LETTER_WIDTHS["W"] = 5;
 LETTER_WIDTHS["w"] = 5;
 
-export function write(text, color, scale, spacing, y) {
+/**
+ * 
+ * @param {*} text 
+ * @param {*} color 
+ * @param {*} scale 
+ * @param {*} spacing 
+ * @param {*} cy is percentage starting with 50
+ * @returns 
+ */
+export function write(text, color, scale, spacing, cy = 50) {
   let letterPos = 0;
   let letters = "";
 
@@ -114,7 +123,7 @@ export function write(text, color, scale, spacing, y) {
     letterPos = letterPos + width + spacing;
   }
 
-  let cx = (100 - (letterPos / 2));
-  let svg = `<g  transform='scale(${scale}) translate(${cx},${y})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
+  let cx = (50 - (letterPos / 2));
+  let svg = `<g  transform='scale(${scale}) translate(${cx},${cy})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
   return svg;
 }

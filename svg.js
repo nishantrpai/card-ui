@@ -80,6 +80,7 @@ LETTERS["-"] = "<path d='M0 3L0 2L3 2V3L0 3Z'/>";
 LETTERS["$"] = "<path transform='translate(0, -1)' d='M1 1L1 0H2L2 1H3L3 2L1 2L1 3L2 3H3L3 4L3 5V6H2L2 7H1L1 6H0V5L2 5L2 4L1 4H0V1L1 1Z'/>";
 LETTERS["#"] = "<path d='M1 5H2L2 4H3V5H4V4H5V3H4V2H5V1H4V0H3V1H2L2 0H1L1 1H0V2H1L1 3H0V4H1L1 5ZM3 2H2L2 3H3V2Z'/>";
 LETTERS[" "] = "";
+LETTERS[")"] = "<path d='M10 8H11V9H10ZM9 9H10V10H9ZM9 10H10V11H9ZM10 11H11V12H10Z'/>"
 
 LETTER_WIDTHS["DEFAULT"] = 3;
 LETTER_WIDTHS[" "] = 1;
@@ -101,13 +102,13 @@ LETTER_WIDTHS["w"] = 5;
  * @param {*} text 
  * @param {*} color 
  * @param {*} scale 
- * @param {*} spacing 
  * @param {*} cy is percentage starting with 50
  * @returns 
  */
-export function write(text, color, scale, spacing, cy = 50) {
+export function write(text, color, scale, cy = 50) {
   let letterPos = 0;
   let letters = "";
+  let spacing = 1;
 
   for (let i = 0; i < text.length; i++) {
     let normalized = text[i].toUpperCase();

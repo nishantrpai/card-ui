@@ -9,7 +9,7 @@ document.querySelector('#message').addEventListener('input', (e) => {
   console.log(words);
   let svg = '';
   words.forEach((word, i) => {
-    svg += write(word, '#fff', 1, 1, y);
+    svg += write(word, '#fff', 1, y);
     y += 10;
     width += 10;
   });

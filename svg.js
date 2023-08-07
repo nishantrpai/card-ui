@@ -123,7 +123,7 @@ export function write(text, color, scale, spacing, cy = 50) {
     letterPos = letterPos + width + spacing;
   }
 
-  let cx = (50 - (letterPos / 2));
+  let cx = (52 - (letterPos / 2));
   let svg = `<g  transform='scale(${scale}) translate(${cx},${cy})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
   return svg;
 }

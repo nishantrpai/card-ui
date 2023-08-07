@@ -3,6 +3,7 @@ import { write } from './svg.js'
 document.querySelector('#message').addEventListener('input', (e) => {
   // add svg to preview
   let words = e.target.value.split(' ');
+  words = words.filter(word => word.length > 0);
   let width = 102;
   let y = 50;
   console.log(words);

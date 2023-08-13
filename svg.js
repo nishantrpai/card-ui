@@ -128,3 +128,7 @@ export function write(text, color, scale, cy = 50) {
   let svg = `<g  transform='scale(${scale}) translate(${cx},${cy})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
   return svg;
 }
+
+export function setBackground(pattern, foreground, background) {
+  
+}

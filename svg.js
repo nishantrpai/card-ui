@@ -105,7 +105,7 @@ LETTER_WIDTHS["w"] = 5;
  * @param {*} cy is percentage starting with 50
  * @returns 
  */
-export function write(text, color, scale, cy = 50) {
+export function write(text, color, scale) {
   let letterPos = 0;
   let letters = "";
   let spacing = 1;
@@ -124,7 +124,8 @@ export function write(text, color, scale, cy = 50) {
     letterPos = letterPos + width + spacing;
   }
 
-  let cx = (52 - (letterPos / 2));
+  let cx = 0;
+  let cy = 0;
   let svg = `<g  transform='scale(${scale}) translate(${cx},${cy})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
   return svg;
 }

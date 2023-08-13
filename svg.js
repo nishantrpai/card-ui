@@ -83,7 +83,7 @@ LETTERS[" "] = "";
 LETTERS[")"] = "<path d='M0 0H1V1H0M1 1H2V2H1M1 2H2V3H1M0 3H1V4H0' />"
 
 LETTER_WIDTHS["DEFAULT"] = 3;
-LETTER_WIDTHS[" "] = 1;
+LETTER_WIDTHS[" "] = 3;
 LETTER_WIDTHS["."] = 1;
 LETTER_WIDTHS[":"] = 1;
 LETTER_WIDTHS["!"] = 1;
@@ -93,7 +93,7 @@ LETTER_WIDTHS["N"] = 4;
 LETTER_WIDTHS["n"] = 4;
 LETTER_WIDTHS["#"] = 5;
 LETTER_WIDTHS["M"] = 5;
-LETTER_WIDTHS["m"] = 5;
+LETTER_WIDTHS["m"] = 7;
 LETTER_WIDTHS["W"] = 5;
 LETTER_WIDTHS["w"] = 5;
 
@@ -109,24 +109,34 @@ export function write(text, color, scale) {
   let letterPos = 0;
   let letters = "";
   let spacing = 1;
+  let cy = 0;
 
   for (let i = 0; i < text.length; i++) {
+    // if not line break
+    console.log(text[i]);
+    if(text[i] === "\n") {
+      console.log('line break');
+      cy += 10;
+      letterPos = 0;
+      continue;
+    }
+    if(text[i] === " ") {
+      letterPos += 3;
+    }      
     let normalized = text[i].toUpperCase();
     let path = LETTERS[normalized];
     let width = LETTER_WIDTHS[normalized]
       ? LETTER_WIDTHS[normalized]
       : LETTER_WIDTHS["DEFAULT"];
 
-    console.log(normalized, path, width);
     if (!path) continue;
 
-    letters += `<g transform='translate(${letterPos})'>${path}</g>`;
+    letters += `<g transform='translate(${letterPos},${cy})'>${path}</g>`;
     letterPos = letterPos + width + spacing;
   }
 
   let cx = 0;
-  let cy = 0;
-  let svg = `<g  transform='scale(${scale}) translate(${cx},${cy})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
+  let svg = `<g  transform='scale(${scale})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
   return svg;
 }
 

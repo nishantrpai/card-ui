@@ -16,3 +16,9 @@ document.querySelector('#post-textinput')?.addEventListener('input', (e) => {
 document.querySelector('#signature-clear')?.addEventListener('click', (e) => {
   signaturePad.clear();
 });
+
+document.querySelector('#signature-save')?.addEventListener('click', (e) => {
+  // resize to 100x100
+  let data = signaturePad.toDataURL('image/svg+xml');
+  document.querySelector('#signature-output').src = data;
+});

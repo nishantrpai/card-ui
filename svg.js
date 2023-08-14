@@ -135,11 +135,6 @@ export function write(text, color, scale) {
     letterPos = letterPos + width + spacing;
   }
 
-  let cx = 0;
   let svg = `<g  transform='scale(${scale})' fill='${color}' fill-rule='evenodd' clip-rule='evenodd' aria-label='${text}'>${letters}</g>`;
   return svg;
-}
-
-export function setBackground(pattern, foreground, background) {
-  
 }

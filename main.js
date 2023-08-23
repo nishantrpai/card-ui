@@ -46,3 +46,7 @@ window.addEventListener('load', async () => {
   console.log(stamp);
   document.querySelector('#stamp').src = stamp;
 });
+
+/**
+ * TODO: Add mint option and sign options
+ */

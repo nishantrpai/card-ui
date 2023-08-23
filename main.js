@@ -4,6 +4,7 @@ let signature = '';
 let address = '';
 let message = '';
 const canvas = document.querySelector("canvas");
+let JSON_RPC = 'http://127.0.0.1:8545';
 
 const signaturePad = new SignaturePad(canvas);
 
@@ -32,4 +33,16 @@ document.querySelector('#signature-save')?.addEventListener('click', (e) => {
 
 document.querySelector('#send-postcard')?.addEventListener('click', (e) => {
   console.log(signature, address, message);
+});
+
+// on load fetch stamp from contract
+window.addEventListener('load', async () => {
+  // ethers contract
+  const provider = new ethers.JsonRpcProvider(JSON_RPC);
+  const contract = new ethers.Contract('0x5FbDB2315678afecb367f032d93F642f64180aa3', [
+    'function getCurrentStamp() public view returns (string memory)',
+  ], provider);
+  const stamp = await contract.getCurrentStamp();
+  console.log(stamp);
+  document.querySelector('#stamp').src = stamp;
 });

@@ -7,7 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-  <title>Vite App</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.7.1/ethers.umd.min.js"></script>
+  <title>Post Cards</title>
 </head>
 
 <body>
@@ -31,7 +32,10 @@
       <!-- rectangle on top right -->
       <g style="stroke:#222;stroke-width:2;fill:#000">
         <rect x="720" y="20" width="50" height="50" />
-        <image x="720" y="20" width="50"  xlink:href="https://opepenai.nyc3.digitaloceanspaces.com/images/db08d599-7596-479e-a126-2523f96bf424@lg.png" />
+        <foreignObject x="720" y="20" width="50" height="50">
+          <div style="display: flex;justify-content: center;align-items: center;width: 100%;height: 100%;">
+            <img id="stamp" width="30" />
+          </div>
       </g>
       <!-- input on the right side -->
       <foreignObject x="420" y="120" width="300" height="450">

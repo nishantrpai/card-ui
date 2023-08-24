@@ -5,6 +5,7 @@ let address = '';
 let message = '';
 const canvas = document.querySelector("canvas");
 let JSON_RPC = 'http://127.0.0.1:8545';
+let contract;
 
 const signaturePad = new SignaturePad(canvas);
 
@@ -31,19 +32,30 @@ document.querySelector('#signature-save')?.addEventListener('click', (e) => {
   document.querySelector('#signature-output').src = data;
 });
 
-document.querySelector('#send-postcard')?.addEventListener('click', (e) => {
+document.querySelector('#send-postcard')?.addEventListener('click', async (e) => {
+  // ethers contract get signer and send transaction
   console.log(signature, address, message);
+  const provider = new ethers.JsonRpcProvider(JSON_RPC);
+  // not real addresses, spawned using hardhat
+  const wallet = new ethers.Wallet('0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80', provider);
+  const tx = await contract.connect(wallet).mint(address, signature, message);
+  await tx.wait();
+  console.log("Card minted successfully");
 });
 
 // on load fetch stamp from contract
 window.addEventListener('load', async () => {
   // ethers contract
+  // get query params from link
+  const urlParams = new URLSearchParams(window.location.search);
+  
   const provider = new ethers.JsonRpcProvider(JSON_RPC);
-  const contract = new ethers.Contract('0x5FbDB2315678afecb367f032d93F642f64180aa3', [
+  contract = new ethers.Contract('0x5FbDB2315678afecb367f032d93F642f64180aa3', [
     'function getCurrentStamp() public view returns (string memory)',
+    'function mint(address, string memory, string memory) public returns (bool)',
   ], provider);
+  console.log(contract);
   const stamp = await contract.getCurrentStamp();
-  console.log(stamp);
   document.querySelector('#stamp').src = stamp;
 });
 
